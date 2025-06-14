@@ -40,7 +40,7 @@ export default function Header() {
         showHeader ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
-      <div className="text-[1rem] font-extrabold text-black tracking-wide ">ShopEase</div>
+      <div className="text-[1rem] font-extrabold text-black tracking-wide "><a href='/'>Luxera</a></div>
 
       <button
         className="md:hidden text-black"

@@ -2,15 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
 import Header from "@/components/Header";
+import ScrollFadeIn from "@/components/ScrollFadeIn";
 export default function HomePage() {
   return (
     <main className="bg-white min-h-screen text-gray-900">
       {/* Header */}
       <Header/>
+      <ScrollFadeIn delay={0.1}>
       <HeroSection/>
+      </ScrollFadeIn>
 
 
-
+<ScrollFadeIn delay={0.2}>
       {/* Featured Categories */}
       <section className="py-12 px-4">
         <h3 className="text-2xl font-semibold mb-6 text-center">Featured Categories</h3>
@@ -22,8 +25,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
+</ScrollFadeIn>
       {/* Best Sellers */}
+      <ScrollFadeIn delay={0.3}>
       <section className="py-12 px-4 bg-gray-50">
         <h3 className="text-2xl font-semibold mb-6 text-center">Best Sellers</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -38,9 +42,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
+</ScrollFadeIn>
       
-
+<ScrollFadeIn delay={0.4}>
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-6 text-center">
         <p>&copy; 2025 ShopEase. All rights reserved.</p>
@@ -49,6 +53,7 @@ export default function HomePage() {
           <Link href="/terms" className="hover:underline">Terms of Service</Link>
         </div>
       </footer>
+      </ScrollFadeIn>
     </main>
   );
 }
