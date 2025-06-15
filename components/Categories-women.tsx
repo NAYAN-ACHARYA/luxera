@@ -15,14 +15,14 @@ export default function MenCategoryCard() {
             <h3 className="text-4xl sm:text-5xl font-bold  mb-6">
               Define Your Elegance
             </h3>
-            <p className="text-gray-700 text-lg sm:text-xl mb-8">
+            <p className="text-gray-700 text-lg sm:text-xl mb-8 ">
               Explore the latest in women’s fashion — from timeless classics to modern silhouettes. Curated with care, crafted for confidence
             </p>
 
             <div className="flex justify-center md:justify-between sm:mx-1.5">
   <Link
     href="/categories/men"
-    className="relative text-[26px] font-semibold text-black group transition-transform duration-300 hover:scale-105"
+    className="relative text-[26px] font-semibold text-black group transition-transform duration-300 hover:scale-105 "
   >
     Shop Now
     <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black transition-all duration-300 group-hover:w-0"></span>
@@ -46,7 +46,7 @@ export default function MenCategoryCard() {
             <h3 className="text-4xl sm:text-5xl font-bold mb-6">
               Define Your Elegance
             </h3>
-            <p className="text-gray-700 text-lg sm:text-xl mb-8">
+            <p className="text-gray-700 text-lg sm:text-xl sm:mb-8">
               Explore the latest in women’s fashion — from timeless classics to modern silhouettes. Curated with care, crafted for confidence
             </p>
 

@@ -14,6 +14,7 @@ export default function Header() {
     { href: '#categories', label: 'Categories' },
     { href: '/contact', label: 'Contact' },
     { href: '/cart', label: 'Cart' },
+    {href:'/admin',label:'Admin'},
   ];
 
   // Disable scroll when menu is open
@@ -56,7 +57,7 @@ export default function Header() {
         }`}
     >
       <div className="font-extrabold text-black tracking-wide text-[22px]">
-        <Link href="/">Luxera</Link>
+        <Link href="/">LUXÉRA</Link>
       </div>
 
       <button

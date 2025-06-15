@@ -24,7 +24,7 @@ export default function WomenCategoryCard() {
             <h3 className="text-4xl sm:text-5xl font-bold font-['Barlow_Condensed'] mb-6">
               Wear Your Edge
             </h3>
-            <p className="text-gray-700 text-lg font-['Barlow_Condensed'] sm:text-xl mb-8">
+            <p className="text-gray-700 text-lg font-['Barlow_Condensed'] sm:text-xl sm:mb-8">
               Discover the latest trends in men’s fashion. Handpicked styles,
               premium quality, and comfort for every occasion.
             </p>

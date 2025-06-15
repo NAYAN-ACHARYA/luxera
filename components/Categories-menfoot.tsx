@@ -24,7 +24,7 @@ export default function MenFootCategoryCard() {
             <h3 className="text-4xl sm:text-5xl font-bold  mb-6">
               Elevate Every Step
             </h3>
-            <p className="text-gray-700 text-lg sm:text-xl mb-8">
+            <p className="text-gray-700 text-lg sm:text-xl sm:mb-8">
               From street-ready sneakers to refined leather shoes — find the perfect pair to match your stride. Style, comfort, and durability in every step.
             </p>
 
