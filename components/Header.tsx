@@ -1,7 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
+
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,10 +12,22 @@ export default function Header() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/shop', label: 'Shop' },
-    { href: '/categories', label: 'Categories' },
+    { href: '#categories', label: 'Categories' },
     { href: '/contact', label: 'Contact' },
     { href: '/cart', label: 'Cart' },
   ];
+
+  useEffect(() => {//for preventing scrolling during mobile view(when the header is open)
+  if (menuOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+
+  return () => {
+    document.body.style.overflow = '';
+  };
+}, [menuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,17 +43,20 @@ export default function Header() {
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
   return (
     <header
-      className={`bg-white shadow-md px-6 py-4 flex items-center justify-between font-sans fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
-        showHeader ? 'translate-y-0' : '-translate-y-full'
-      }`}
+      className={`bg-white shadow-md px-6 py-4 flex items-center justify-between 
+        fixed top-0 left-0 w-full z-50 transition-transform duration-300 
+        font-['Barlow_Condensed'] text-[18px] ${
+          showHeader ? 'translate-y-0' : '-translate-y-full'
+        }`}
     >
-      <div className="text-[1rem] font-extrabold text-black tracking-wide "><a href='/'>Luxera</a></div>
+      <div className="font-extrabold text-black tracking-wide text-[22px]">
+        <a href="/">Luxera</a>
+      </div>
 
       <button
         className="md:hidden text-black"
@@ -50,35 +66,57 @@ export default function Header() {
         {menuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      <nav className="hidden md:flex space-x-2 text-[14px] font-medium">
-        {navLinks.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className="relative inline-block text-black px-4 py-2 transition-all duration-300 
-              after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:h-[2px] 
-              after:w-0 after:bg-black after:transition-all after:duration-300 
-              hover:after:left-0 hover:after:w-full"
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
+      <nav className="hidden md:flex items-center space-x-4 font-medium">
+  {navLinks.map(({ href, label }) => (
+    <Link
+      key={href}
+      href={href}
+      className="relative inline-block text-black px-4 py-2 transition-all duration-300 
+        after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:h-[2px] 
+        after:w-0 after:bg-black after:transition-all after:duration-300 
+        hover:after:left-0 hover:after:w-full"
+    >
+      {label}
+    </Link>
+  ))}
 
-      {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center md:hidden py-4 z-50">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setMenuOpen(false)}
-              className="block px-4 py-2 text-[14px] text-black hover:bg-gray-100 w-full text-center"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-      )}
+  <Link href="/profile" className="text-black ml-2 hover:text-gray-700 transition">
+    <User size={22} />
+  </Link>
+</nav>
+
+{menuOpen && (
+  <div className="fixed top-0 left-0 w-full h-screen bg-white z-[100] flex flex-col items-center justify-center space-y-6 px-4 transition-all duration-300">
+    <button
+      onClick={() => setMenuOpen(false)}
+      className="absolute top-6 right-6 text-black"
+      aria-label="Close menu"
+    >
+      <X size={28} />
+    </button>
+
+    {navLinks.map(({ href, label }) => (
+      <Link
+        key={href}
+        href={href}
+        onClick={() => setMenuOpen(false)}
+        className="text-black text-2xl font-medium hover:underline transition-all"
+      >
+        {label}
+      </Link>
+    ))}
+
+    <Link
+      href="/profile"
+      onClick={() => setMenuOpen(false)}
+      className="text-black text-2xl font-medium hover:underline transition-all"
+    >
+      Profile
+    </Link>
+  </div>
+)}
+
+
     </header>
   );
 }

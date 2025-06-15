@@ -33,7 +33,7 @@ const HeroSection = () => {
       ))}
 
       {/* Foreground Content */}
-      <div className="relative z-10 max-w-4xl px-4 sm:px-6 py-10 text-white font-sans text-center ">
+      <div className="relative z-10 max-w-4xl px-4 sm:px-6 py-10 text-white font-['Barlow_Condensed'] text-center ">
   <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] animate-fade-in-up">
     Discover Your Style
   </div>
@@ -45,7 +45,7 @@ const HeroSection = () => {
   <Link
     href="/shop"
     className="relative inline-block text-white font-semibold transition-all duration-300 animate-fade-in-up delay-500
-      text-[32px] font-[Inter,sans-serif]
+      text-[32px] font-['Barlow_Condensed']
       after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:w-0 after:h-[2px] after:bg-white
       after:transition-all after:duration-300 hover:after:left-0 hover:after:w-full"
   >
