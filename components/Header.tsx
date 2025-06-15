@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, User } from 'lucide-react';
 
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
@@ -17,18 +16,20 @@ export default function Header() {
     { href: '/cart', label: 'Cart' },
   ];
 
-  useEffect(() => {//for preventing scrolling during mobile view(when the header is open)
-  if (menuOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
+  // Disable scroll when menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
 
-  return () => {
-    document.body.style.overflow = '';
-  };
-}, [menuOpen]);
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
 
+  // Show/hide header on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -55,7 +56,7 @@ export default function Header() {
         }`}
     >
       <div className="font-extrabold text-black tracking-wide text-[22px]">
-        <a href="/">Luxera</a>
+        <Link href="/">Luxera</Link>
       </div>
 
       <button
@@ -67,56 +68,54 @@ export default function Header() {
       </button>
 
       <nav className="hidden md:flex items-center space-x-4 font-medium">
-  {navLinks.map(({ href, label }) => (
-    <Link
-      key={href}
-      href={href}
-      className="relative inline-block text-black px-4 py-2 transition-all duration-300 
-        after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:h-[2px] 
-        after:w-0 after:bg-black after:transition-all after:duration-300 
-        hover:after:left-0 hover:after:w-full"
-    >
-      {label}
-    </Link>
-  ))}
+        {navLinks.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className="relative inline-block text-black px-4 py-2 transition-all duration-300 
+              after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:h-[2px] 
+              after:w-0 after:bg-black after:transition-all after:duration-300 
+              hover:after:left-0 hover:after:w-full"
+          >
+            {label}
+          </Link>
+        ))}
 
-  <Link href="/profile" className="text-black ml-2 hover:text-gray-700 transition">
-    <User size={22} />
-  </Link>
-</nav>
+        <Link href="/profile" className="text-black ml-2 hover:text-gray-700 transition">
+          <User size={22} />
+        </Link>
+      </nav>
 
-{menuOpen && (
-  <div className="fixed top-0 left-0 w-full h-screen bg-white z-[100] flex flex-col items-center justify-center space-y-6 px-4 transition-all duration-300">
-    <button
-      onClick={() => setMenuOpen(false)}
-      className="absolute top-6 right-6 text-black"
-      aria-label="Close menu"
-    >
-      <X size={28} />
-    </button>
+      {menuOpen && (
+        <div className="fixed top-0 left-0 w-full h-screen bg-white z-[100] flex flex-col items-center justify-center space-y-6 px-4 transition-all duration-300">
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-6 right-6 text-black"
+            aria-label="Close menu"
+          >
+            <X size={28} />
+          </button>
 
-    {navLinks.map(({ href, label }) => (
-      <Link
-        key={href}
-        href={href}
-        onClick={() => setMenuOpen(false)}
-        className="text-black text-2xl font-medium hover:underline transition-all"
-      >
-        {label}
-      </Link>
-    ))}
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMenuOpen(false)}
+              className="text-black text-2xl font-medium hover:underline transition-all"
+            >
+              {label}
+            </Link>
+          ))}
 
-    <Link
-      href="/profile"
-      onClick={() => setMenuOpen(false)}
-      className="text-black text-2xl font-medium hover:underline transition-all"
-    >
-      Profile
-    </Link>
-  </div>
-)}
-
-
+          <Link
+            href="/profile"
+            onClick={() => setMenuOpen(false)}
+            className="text-black text-2xl font-medium hover:underline transition-all"
+          >
+            Profile
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
