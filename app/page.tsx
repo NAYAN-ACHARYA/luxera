@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import HeroSection from "@/components/HeroSection";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import ScrollFadeIn from "@/components/ScrollFadeIn";
 import MenCategoryCard from "@/components/Categories-men";
 import WomenCategoryCard from "@/components/Categories-women";
@@ -13,7 +13,7 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsLoading(false), 3000);
+    const timeout = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timeout);
   }, []);
 
