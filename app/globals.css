@@ -2,25 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap');
 @import "tailwindcss";
 
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-html{
+html {
   scroll-behavior: smooth;
 }
+
 body {
-  background-color: #fefaf6; /* same as your section */
-  color: #000;
-  background: var(--background);
-  color: var(--foreground);
-  /* Font now controlled via className in RootLayout, no need to set it here */
+  background-color: #fefaf6; /* Light cream background */
+  color: #000;               /* Text color black */
 }

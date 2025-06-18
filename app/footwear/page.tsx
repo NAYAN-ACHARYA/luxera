@@ -1,26 +1,49 @@
-import Header from '@/components/Header/Header';
+'use client';
 
-export default function Footwear() {
+import Header from '@/components/Header/Header';
+import HeroSection from './components/HeroSection';
+import ProductCard from './components/ProductCard';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase-config';
+import { useEffect, useState } from 'react';
+
+type Product = {
+  name: string;
+  cost: number;
+  images: string[];
+};
+
+export default function FootwearPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const userCollectionRef = collection(db, 'products');
+
+  const getProducts = async () => {
+    try {
+      const data = await getDocs(userCollectionRef);
+      const productsData = data.docs.map((doc) => doc.data() as Product);
+      setProducts(productsData);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <>
       <Header />
-      <div className="flex flex-col md:flex-row items-center justify-between px-6 py-10 gap-6 bg-[#fefaf6] font-[Barlow_Condensed] mt-[140px] md:max-h-96">
-        {/* Left Content */}
-        <div className="md:w-[25%] w-full md:text-right text-center">
-          <h2 className="text-6xl font-bold mb-4 text-black">Sneakers</h2>
-          <p className="text-gray-700 text-[26px]">
-            Discover our sneakers designed from a rigorous selection of natural and recycled materials: recycled wool, hemp, linen and recycled cotton.
-          </p>
-        </div>
-
-        {/* Right Image */}
-        <div className="md:w-[50%] w-full">
-          <img
-            src="/footwear-2.jpg"
-            alt="Sneakers"
-            className="w-full max-h-96 rounded-lg shadow-md object-cover"
+      <HeroSection />
+      <div className="px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-white font-[Barlow_Condensed]">
+        {products.map((product, index) => (
+          <ProductCard
+            key={index}
+            name={product.name}
+            cost={product.cost}
+            image={product.images[0]}
           />
-        </div>
+        ))}
       </div>
     </>
   );
