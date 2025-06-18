@@ -50,7 +50,7 @@ export default function Header() {
 
   return (
     <header
-      className={`bg-white shadow-md px-6 py-4 fixed top-0 left-0 w-full z-50 
+      className={`bg-white  px-6 py-4 fixed top-0 left-0 w-full z-50 
         transition-transform duration-300 font-['Barlow_Condensed'] text-[18px] 
         ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
     >
