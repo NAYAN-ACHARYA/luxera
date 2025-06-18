@@ -4,7 +4,22 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 
-export default function MobileMenu({ navLinks, pathname, closeMenu }: any) {
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+interface MobileMenuProps {
+  navLinks: NavLink[];
+  pathname: string;
+  closeMenu: () => void;
+}
+
+export default function MobileMenu({
+  navLinks,
+  pathname,
+  closeMenu,
+}: MobileMenuProps) {
   const [isSubOpen, setIsSubOpen] = useState(false);
 
   return (
@@ -17,7 +32,7 @@ export default function MobileMenu({ navLinks, pathname, closeMenu }: any) {
         <X size={28} />
       </button>
 
-      {navLinks.map(({ href, label }: any) => {
+      {navLinks.map(({ href, label }) => {
         if (label === 'Categories' && pathname !== '/') {
           return (
             <div key={href} className="w-full">
