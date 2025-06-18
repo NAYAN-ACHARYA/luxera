@@ -4,11 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 
+// Define type for each navigation link
 interface NavLink {
   href: string;
   label: string;
 }
 
+// Define props type for the component
 interface MobileMenuProps {
   navLinks: NavLink[];
   pathname: string;
@@ -32,40 +34,40 @@ export default function MobileMenu({
         <X size={28} />
       </button>
 
-      {navLinks.map(({ href, label }) => {
-        if (label === 'Categories' && pathname !== '/') {
+      {navLinks.map((link) => {
+        if (link.label === 'Categories' && pathname !== '/') {
           return (
-            <div key={href} className="w-full">
+            <div key={link.href} className="w-full">
               <button
                 onClick={() => setIsSubOpen(!isSubOpen)}
                 className="w-full text-left text-black text-2xl font-medium flex justify-between items-center"
               >
-                {label}
+                {link.label}
                 <span className="text-lg">{isSubOpen ? '−' : '+'}</span>
               </button>
 
               {isSubOpen && (
                 <div className="mt-2 ml-4 flex flex-col space-y-2">
                   <Link
-                    href="/#cat1"
+                    href="/men"
                     onClick={closeMenu}
                     className="text-black text-lg hover:underline"
                   >
-                    Subcategory 1
+                    Men
                   </Link>
                   <Link
-                    href="/#cat2"
+                    href="/women"
                     onClick={closeMenu}
                     className="text-black text-lg hover:underline"
                   >
-                    Subcategory 2
+                    Women
                   </Link>
                   <Link
-                    href="/#cat3"
+                    href="/footwear"
                     onClick={closeMenu}
                     className="text-black text-lg hover:underline"
                   >
-                    Subcategory 3
+                    Men Sneakers
                   </Link>
                 </div>
               )}
@@ -75,12 +77,12 @@ export default function MobileMenu({
 
         return (
           <Link
-            key={href}
-            href={href}
+            key={link.href}
+            href={link.href}
             onClick={closeMenu}
             className="text-black text-2xl font-medium hover:underline transition-all w-full text-left"
           >
-            {label}
+            {link.label}
           </Link>
         );
       })}

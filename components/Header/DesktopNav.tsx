@@ -3,10 +3,22 @@
 import Link from 'next/link';
 import { User } from 'lucide-react';
 
-export default function DesktopNav({ navLinks, pathname }: any) {
+// Define type for each navigation link
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+// Define props for the component
+interface DesktopNavProps {
+  navLinks: NavLink[];
+  pathname: string;
+}
+
+export default function DesktopNav({ navLinks, pathname }: DesktopNavProps) {
   return (
     <>
-      {navLinks.map(({ href, label }: any) => {
+      {navLinks.map(({ href, label }) => {
         if (label === 'Categories' && pathname !== '/') {
           return (
             <div key={href} className="relative group">
@@ -21,14 +33,14 @@ export default function DesktopNav({ navLinks, pathname }: any) {
               </Link>
 
               <div className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-md z-[9999] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[160px]">
-                <Link href="/#cat1" className="block px-4 py-2 hover:bg-gray-100">
-                  Subcategory 1
+                <Link href="/men" className="block px-4 py-2 hover:bg-gray-100">
+                  Men
                 </Link>
-                <Link href="/#cat2" className="block px-4 py-2 hover:bg-gray-100">
-                  Subcategory 2
+                <Link href="/women" className="block px-4 py-2 hover:bg-gray-100">
+                  Women
                 </Link>
-                <Link href="/#cat3" className="block px-4 py-2 hover:bg-gray-100">
-                  Subcategory 3
+                <Link href="/footwear" className="block px-4 py-2 hover:bg-gray-100">
+                  Men Sneaker
                 </Link>
               </div>
             </div>

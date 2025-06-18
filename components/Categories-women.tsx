@@ -21,7 +21,7 @@ export default function MenCategoryCard() {
 
             <div className="flex justify-center md:justify-between sm:mx-1.5">
   <Link
-    href="/categories/men"
+    href="/women"
     className="relative text-[26px] font-semibold text-black group transition-transform duration-300 hover:scale-105 "
   >
     Shop Now
