@@ -27,7 +27,9 @@ const barlowCondensed = Barlow_Condensed({
 export const metadata: Metadata = {
   title: "Luxere",
   description: "your only stop to luxury clothing",
+  viewport: "width=device-width, initial-scale=1", // ✅ THIS FIXES MOBILE
 };
+
 
 export default function RootLayout({
   children,
