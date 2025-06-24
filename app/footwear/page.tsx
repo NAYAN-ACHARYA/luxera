@@ -44,7 +44,7 @@ export default function FootwearPage() {
     <>
       <Header />
       <HeroSection />
-      <div className="px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 bg-white font-[Barlow_Condensed]">
+      <div className="px-6 py-50 grid grid-cols-2 md:grid-cols-3  gap-6 bg-white font-[Barlow_Condensed]">
         {products.map((product) => (
           <ProductCard
             key={product.id}

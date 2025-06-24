@@ -14,15 +14,17 @@ export default function ProductCard({ id, name, cost, image }: ProductCardProps)
   return (
     <div
       onClick={() => router.push(`/footwear/${id}`)}
-      className="bg-white rounded-lg p-4 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer"
+      className="bg-white rounded-lg p-4 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer w-full"
     >
-      <img
-        src={image}
-        alt={name}
-        className="w-full h-64 object-cover rounded-md mb-4 transition-opacity duration-300 hover:opacity-90"
-      />
-      <h3 className="text-2xl font-semibold mb-2">{name}</h3>
-      <p className="text-lg text-gray-600">₹{cost}</p>
+      <div className="w-full aspect-[4/3] mb-4 overflow-hidden rounded-md">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-top object-cover transition-opacity duration-300 hover:opacity-90"
+        />
+      </div>
+      <h3 className="text-lg md:text-xl font-semibold mb-1">{name}</h3>
+      <p className="text-base md:text-lg text-gray-600">₹{cost}</p>
     </div>
   );
 }
