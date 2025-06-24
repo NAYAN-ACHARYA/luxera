@@ -35,7 +35,7 @@ export default function Shop(){
         <>
         <Header/>
         <HeroSection/>
-        <div className="px-6 py-50 grid grid-cols-2 md:grid-cols-3  gap-6 bg-white font-[Barlow_Condensed]">
+        <div className="px-6 md:py-50 grid grid-cols-2 md:grid-cols-3  gap-6 bg-white font-[Barlow_Condensed]">
                 {products.map((product) => (
                   <ProductCard
                     key={product.id}
