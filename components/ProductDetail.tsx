@@ -53,13 +53,13 @@ export default function ProductDetailPage() {
 
   const nextImage = () => {
     setSelectedImageIndex((prev) =>
-      product ? (prev + 1) % product.images.length : 0
+      product ? (prev + 1) % (product.images.length-1) : 0
     );
   };
 
   const prevImage = () => {
     setSelectedImageIndex((prev) =>
-      product ? (prev - 1 + product.images.length) % product.images.length : 0
+      product ? (prev - 1 + product.images.length-1) % (product.images.length-1) : 0
     );
   };
 
