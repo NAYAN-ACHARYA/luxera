@@ -69,7 +69,7 @@ export default function AddProduct() {
     const sizesWithQuantities: { size: string; quantity: number }[] = [];
     getSizeOptions().forEach((size) => {
       const qty = Number(form.get(`size_qty_${size}`));
-      if (!isNaN(qty) && qty > 0) {
+      if (!isNaN(qty) && qty >= 0) {
         sizesWithQuantities.push({ size, quantity: qty });
       }
     });
