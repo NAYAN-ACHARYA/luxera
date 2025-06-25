@@ -17,21 +17,24 @@ const [password, setPassword] = useState<string>(""); // inferred
 const [error, setError] = useState<string>("");       // inferred
 const [loading, setLoading] = useState<boolean>(false); // inferred
 
-
-  const loginWithEmail = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push("/");
-    } catch (err: any) {
+const loginWithEmail = async () => {
+  setLoading(true);
+  setError("");
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    router.push("/");
+  } catch (err: unknown) {
+    if (err instanceof Error) {
       setError(err.message);
-    } finally {
-      setLoading(false);
+    } else {
+      setError("An unexpected error occurred.");
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
-  const loginWithGoogle = async () => {
+const loginWithGoogle = async () => {
   setLoading(true);
   setError("");
   try {
@@ -43,7 +46,6 @@ const [loading, setLoading] = useState<boolean>(false); // inferred
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    // Optional: Allow only Gmail accounts
     if (!user.email?.endsWith("@gmail.com")) {
       await auth.signOut();
       setError("Only Gmail accounts are allowed.");
@@ -51,12 +53,17 @@ const [loading, setLoading] = useState<boolean>(false); // inferred
     }
 
     router.push("/");
-  } catch (err: any) {
-    setError(err.message);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      setError(err.message);
+    } else {
+      setError("An unexpected error occurred.");
+    }
   } finally {
     setLoading(false);
   }
 };
+
 
 
   return (
