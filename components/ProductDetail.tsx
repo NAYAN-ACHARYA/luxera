@@ -82,8 +82,8 @@ export default function ProductDetailPage() {
 
       {isModalOpen && product && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/80 overflow-y-auto">
-          <button onClick={closeModal} className="absolute top-4 right-10 text-gray-800 hover:text-gray-600 text-3xl font-bold">✕</button>
-          <button onClick={prevImage} className="absolute left-4 md:left-8 text-gray-800 hover:text-gray-600 text-4xl font-bold">←</button>
+          <button onClick={closeModal} className="absolute top-4 right-10 text-gray-800 hover:text-gray-600 text-3xl font-bold cursor-pointer">✕</button>
+          <button onClick={prevImage} className="absolute left-4 md:left-8 text-gray-800 hover:text-gray-600 text-4xl font-bold cursor-pointer">←</button>
           <div className="max-h-[90vh] overflow-y-auto px-4 py-9">
             <img
               src={product.images[selectedImageIndex]}
@@ -91,7 +91,7 @@ export default function ProductDetailPage() {
               className="w-[95vw] h-auto object-contain rounded-xl shadow-2xl"
             />
           </div>
-          <button onClick={nextImage} className="absolute right-4 md:right-8 text-gray-800 hover:text-gray-600 text-4xl font-bold">→</button>
+          <button onClick={nextImage} className="absolute right-4 md:right-8 text-gray-800 hover:text-gray-600 cursor-pointer text-4xl font-bold">→</button>
         </div>
       )}
       <ProductBottom
