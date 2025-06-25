@@ -12,10 +12,11 @@ import { auth } from "@/lib/firebase-config";
 const LoginPage = () => {
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+const [email, setEmail] = useState<string>("");       // inferred
+const [password, setPassword] = useState<string>(""); // inferred
+const [error, setError] = useState<string>("");       // inferred
+const [loading, setLoading] = useState<boolean>(false); // inferred
+
 
   const loginWithEmail = async () => {
     setLoading(true);

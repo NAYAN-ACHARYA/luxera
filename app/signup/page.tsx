@@ -10,23 +10,24 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase-config";
+import { FirebaseError } from "firebase/app"; // ✅ Import FirebaseError type
 
 const SignupPage = () => {
   const router = useRouter();
 
-  const [name, setName] = useState("");       // ✅ NEW
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const signupWithEmail = async () => {
     setLoading(true);
     setError("");
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      // ✅ Set display name
+
       await updateProfile(userCredential.user, {
         displayName: name,
       });
@@ -34,40 +35,39 @@ const SignupPage = () => {
       await sendEmailVerification(userCredential.user);
       alert("Verification email sent! Please check your inbox.");
       router.push("/login");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const error = err as FirebaseError;
+      setError(error.message);
     } finally {
       setLoading(false);
     }
   };
 
- const signupWithGoogle = async () => {
-  setLoading(true);
-  setError("");
-  try {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: "select_account", // ⬅️ Force showing account selection
-    });
+  const signupWithGoogle = async () => {
+    setLoading(true);
+    setError("");
 
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
 
-    // Optional: Enforce only Gmail emails
-    if (!user.email?.endsWith("@gmail.com")) {
-      await auth.signOut();
-      setError("Only Gmail accounts are allowed.");
-      return;
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      if (!user.email?.endsWith("@gmail.com")) {
+        await auth.signOut();
+        setError("Only Gmail accounts are allowed.");
+        return;
+      }
+
+      router.push("/");
+    } catch (err) {
+      const error = err as FirebaseError;
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
-
-    router.push("/");
-  } catch (err: any) {
-    setError(err.message);
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -76,7 +76,6 @@ const SignupPage = () => {
 
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-        {/* ✅ Name field */}
         <input
           type="text"
           placeholder="Full Name"

@@ -3,14 +3,14 @@
 import Header from "@/components/Header/Header";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { auth } from "@/lib/firebase-config";
 
 export default function ProfilePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState("info");
+  const [user, setUser] = useState<User | null>(null);
+  const [activeTab, setActiveTab] = useState<"info" | "orders" | "addresses">("info");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -41,16 +41,23 @@ export default function ProfilePage() {
   const renderContent = () => {
     switch (activeTab) {
       case "info":
-  return (
-    <div className="space-y-4">
-      <h2 className="text-3xl font-bold mb-6">My Info</h2>
-      <p className="text-2xl font-semibold">Name: {user.displayName || "Unnamed User"}</p>
-      <p className="text-xl">Email: {user.email}</p>
-      <p className="text-xl text-gray-600">
-        Email Verified: {user.emailVerified ? "✅ Yes" : "❌ No"}
-      </p>
-    </div>
-  );
+        return (
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold mb-6">My Info</h2>
+            {user?.photoURL && (
+              <img
+                src={user.photoURL}
+                alt="Profile"
+                className="w-32 h-32 rounded-full object-cover border border-gray-300"
+              />
+            )}
+            <p className="text-2xl font-semibold">Name: {user?.displayName || "Unnamed User"}</p>
+            <p className="text-xl">Email: {user?.email}</p>
+            <p className="text-xl text-gray-600">
+              Email Verified: {user?.emailVerified ? "✅ Yes" : "❌ No"}
+            </p>
+          </div>
+        );
 
       case "orders":
         return (
@@ -59,6 +66,7 @@ export default function ProfilePage() {
             <p className="text-lg text-gray-600">You have no orders yet.</p>
           </div>
         );
+
       case "addresses":
         return (
           <div>
@@ -66,6 +74,7 @@ export default function ProfilePage() {
             <p className="text-lg text-gray-600">No saved addresses.</p>
           </div>
         );
+
       default:
         return null;
     }
@@ -80,7 +89,7 @@ export default function ProfilePage() {
         {["orders", "addresses", "info"].map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => setActiveTab(tab as "orders" | "addresses" | "info")}
             className={`text-sm font-medium ${
               activeTab === tab ? "text-black underline" : "text-gray-500"
             }`}
@@ -133,4 +142,4 @@ export default function ProfilePage() {
       </div>
     </>
   );
-} //image not visisble
+}
